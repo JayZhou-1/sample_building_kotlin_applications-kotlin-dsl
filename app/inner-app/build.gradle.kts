@@ -1,11 +1,10 @@
 plugins {
     kotlin("jvm") version "1.6.10"
-//    kotlin("jvm") version "1.5.31"
-    application // <2>
+    application
 }
 
 repositories {
-    mavenCentral() // <3>
+    mavenCentral()
 }
 
 dependencies {
@@ -13,28 +12,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.faire.InnerAppKt") // <9>
-}
-
-//gradlePlugin {
-//    plugins {
-//        create("simplePlugin") {
-//            id = "org.example.greeting"
-//            implementationClass = "org.example.GreetingPlugin"
-//        }
-//    }
-//}
-
-
-abstract class CustomTask @Inject constructor(
-    private val message: String,
-    private val number: Int
-) : DefaultTask() {
-    @TaskAction
-    fun mytask() {
-        println("this is from task + $message  $number")
-    }
+    mainClass.set("com.faire.InnerAppKt")
 }
 
 
-tasks.register<CustomTask>("myTask", "hello", 42)
