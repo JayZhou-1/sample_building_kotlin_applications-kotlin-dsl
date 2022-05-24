@@ -1,0 +1,1 @@
+/Users/shuaizhou/workspace/sample_building_kotlin_applications-kotlin-dsl/app/build/classes/kotlin/main/demo/App.class:/Users/shuaizhou/workspace/sample_building_kotlin_applications-kotlin-dsl/app/build/classes/kotlin/main/demo/AppKt.class
