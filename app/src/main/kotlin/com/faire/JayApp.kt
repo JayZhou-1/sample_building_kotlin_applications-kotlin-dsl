@@ -8,7 +8,7 @@ import faire.NotifyAfter
 import javax.inject.Inject
 import okhttp3.OkHttpClient
 
-@NeverNotify
+@NotifyAfter("2022-01-01")
 class JayApp @Inject constructor(val builder: OkHttpClient.Builder): BackFill() {
 
     fun getHttpClient(): OkHttpClient {
@@ -30,6 +30,6 @@ class GuiceTestModule : AbstractModule() {
 }
 
 @NotifyAfter(date = "2022-07-04")
-class JayApp2() {
+class JayApp2() : BackFill(){
 
 }

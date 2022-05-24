@@ -14,7 +14,7 @@ abstract class CustomTaskInRoot @Inject constructor(
 
 tasks.register<CustomTaskInRoot>("myTaskInRoot", "hello from root", 42)
 
-apply<NotifyAfterPlugin>()
+
 
 plugins {
     `java-library`
@@ -37,29 +37,32 @@ dependencies {
 //    implementation(kotlin("stdlib"))
 //    implementation(kotlin("stdlib-jdk8"))
     implementation(projects.app)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 }
 
-allprojects{
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = JVM_TARGET.toString()
-            incremental = true
-            suppressWarnings = true
-            freeCompilerArgs = listOf("-Xjvm-default=enable", "-Xinline-classes")
-        }
-    }
-}
+apply<NotifyAfterPlugin>()
 
-
-subprojects {
-
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-}
+//allprojects{
+//    repositories {
+//        mavenCentral()
+//        jcenter()
+//    }
+//    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+//        kotlinOptions {
+//            jvmTarget = JVM_TARGET.toString()
+//            incremental = true
+//            suppressWarnings = true
+//            freeCompilerArgs = listOf("-Xjvm-default=enable", "-Xinline-classes")
+//        }
+//    }
+//}
+//
+//
+//subprojects {
+//
+//    repositories {
+//        mavenCentral()
+//        jcenter()
+//    }
+//}
 val JVM_TARGET = JavaVersion.VERSION_11

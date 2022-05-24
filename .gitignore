@@ -10,7 +10,7 @@ logs/
 **/out/
 npm-debug.log
 dependency-reduced-pom.xml
-build/
+build/*
 app-common/build/*
 buildSrc/build/*
 

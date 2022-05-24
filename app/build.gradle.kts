@@ -1,8 +1,7 @@
 plugins {
     kotlin("jvm") version "1.6.10"
-    `java-gradle-plugin`
-
-    application // <2>
+    `java-library`
+//    application // <2>
 }
 
 repositories {
@@ -13,31 +12,21 @@ dependencies {
     implementation(projects.appCommon)
     implementation("com.google.inject:guice:5.1.0")
     implementation("com.squareup.okhttp3:okhttp:4.0.1")
+    implementation("org.reflections:reflections:0.9.10")
+
 }
 
-application {
-    mainClass.set("demo.AppKt") // <9>
-}
+//application {
+//    mainClass.set("demo.AppKt") // <9>
+//}
 
-gradlePlugin {
-    plugins {
-        create("simplePlugin") {
-            id = "org.example.greeting"
-            implementationClass = "org.example.GreetingPlugin"
-        }
-    }
-}
-
-
-abstract class CustomTask @Inject constructor(
-    private val message: String,
-    private val number: Int
-) : DefaultTask() {
-    @TaskAction
-    fun mytask() {
-        println("this is from task + $message  $number")
-    }
-}
+//gradlePlugin {
+//    plugins {
+//        create("simplePlugin") {
+//            id = "org.example.greeting"
+//            implementationClass = "org.example.GreetingPlugin"
+//        }
+//    }
+//}
 
 
-tasks.register<CustomTask>("myTask", "hello", 42)

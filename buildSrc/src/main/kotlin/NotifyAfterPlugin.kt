@@ -18,13 +18,12 @@ class NotifyAfterPlugin : Plugin<Project> {
 
         val javaExtension = project.extensions.getByType(JavaPluginExtension::class.java)
         val mainSourceSet = javaExtension.sourceSets["main"]
-//        val runTimeClassPath = mainSourceSet.runtimeClasspath.asPath
-//        val outputClassDir = mainSourceSet.output.classesDirs.asPath
-//        val compileClassPath = mainSourceSet.compileClasspath.asPath
+        val runTimeClassPath = mainSourceSet.runtimeClasspath
+        val outputClassDir = mainSourceSet.output.classesDirs
+        val compileClassPath = mainSourceSet.compileClasspath
 
-//        notifyAfterTask = project.tasks.register<NotifyAfterTask>("notifyAfter")
-//        notifyAfterTask.get().execClasspath.setFrom(runTimeClassPath)
-
+        notifyAfterTask = project.tasks.register<NotifyAfterTask>("notifyAfter")
+        notifyAfterTask.get().execClasspath.setFrom(runTimeClassPath)
 
         project.task("jayzhou") {
             doLast {
