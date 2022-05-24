@@ -18,12 +18,12 @@ class NotifyAfterPlugin : Plugin<Project> {
 
         val javaExtension = project.extensions.getByType(JavaPluginExtension::class.java)
         val mainSourceSet = javaExtension.sourceSets["main"]
-        val runTimeClassPath = mainSourceSet.runtimeClasspath.asPath
-        val outputClassDir = mainSourceSet.output.classesDirs.asPath
-        val compileClassPath = mainSourceSet.compileClasspath.asPath
+//        val runTimeClassPath = mainSourceSet.runtimeClasspath.asPath
+//        val outputClassDir = mainSourceSet.output.classesDirs.asPath
+//        val compileClassPath = mainSourceSet.compileClasspath.asPath
 
-        notifyAfterTask = project.tasks.register<NotifyAfterTask>("notifyAfter")
-        notifyAfterTask.get().execClasspath.setFrom(runTimeClassPath)
+//        notifyAfterTask = project.tasks.register<NotifyAfterTask>("notifyAfter")
+//        notifyAfterTask.get().execClasspath.setFrom(runTimeClassPath)
 
 
         project.task("jayzhou") {
@@ -32,20 +32,22 @@ class NotifyAfterPlugin : Plugin<Project> {
                 println("==========projects==========")
                 projects.forEach {
                     println(it.displayName)
-                    println("project.buildDir.absolutePath = ${it.buildDir.absolutePath}")
+//                    println("project.buildDir.absolutePath = ${it.buildDir.absolutePath}")
 //                    println("it.findProject(\":app:common\") = ${it.findProject(":app-common")}")
                     try {
-                        val javaExtension = project.extensions.getByType(JavaPluginExtension::class.java)
+                        val javaExtension = it.extensions.getByType(JavaPluginExtension::class.java)
                         val mainSourceSet = javaExtension.sourceSets["main"]
                         val runTimeClassPath = mainSourceSet.runtimeClasspath.asPath
                         val outputClassDir = mainSourceSet.output.classesDirs.asPath
                         val compileClassPath = mainSourceSet.compileClasspath.asPath
                         println("runTimeClassPath = ${runTimeClassPath}")
-                        println("outputClassDir = ${outputClassDir}")
-                        println("compileClassPath = ${compileClassPath}")
+//                        println("outputClassDir = ${outputClassDir}")
+//                        println("compileClassPath = ${compileClassPath}")
                     } catch (e: Exception) {
                         println("could not get JavaExtension")
                     }
+                    println()
+                    println()
                 }
             }
         }

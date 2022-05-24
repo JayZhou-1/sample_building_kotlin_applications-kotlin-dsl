@@ -1,0 +1,45 @@
+*.iml
+.DS_Store
+
+# for files/dirs used in CI that shouldn't appear in git diffs
+/.ci/
+
+bin/
+target/
+logs/
+**/out/
+npm-debug.log
+dependency-reduced-pom.xml
+build/
+.gradle/
+backend.ipr
+backend.iws
+kotlin-protos-out
+node_modules/
+protos/src/main/out/
+protos/android-protos/src/main/java/
+.terraform/
+*.hprof*
+hs_err_pid*.log
+
+## VS Code gitignore
+.classpath
+.project
+.settings/
+.vscode/
+
+protos/ios-protos/
+
+## Opt out everything in .idea by default
+/.idea/**
+## Opt certain .idea files back in
+!/.idea/encodings.xml
+!/.idea/fileTemplates/*
+!/.idea/inspectionProfiles/Project_Default.xml
+
+# Python
+scripts/__pycache__/
+scripts/pytest/__pycache__/
+
+# local enviroment variables file
+.env
