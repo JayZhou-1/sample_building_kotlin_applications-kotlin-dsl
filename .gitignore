@@ -11,13 +11,16 @@ logs/
 npm-debug.log
 dependency-reduced-pom.xml
 build/
-.gradle/
+app-common/build/*
+buildSrc/build/*
+
+.gradle/*
+
 backend.ipr
 backend.iws
 kotlin-protos-out
 node_modules/
-protos/src/main/out/
-protos/android-protos/src/main/java/
+
 .terraform/
 *.hprof*
 hs_err_pid*.log
@@ -28,7 +31,6 @@ hs_err_pid*.log
 .settings/
 .vscode/
 
-protos/ios-protos/
 
 ## Opt out everything in .idea by default
 /.idea/**
