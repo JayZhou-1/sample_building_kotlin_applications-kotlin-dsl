@@ -13,6 +13,8 @@ dependency-reduced-pom.xml
 build/*
 app-common/build/*
 buildSrc/build/*
+app/build
+buildSrc/.gradle
 
 .gradle/*
 
