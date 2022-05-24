@@ -1,9 +1,9 @@
 package com.faire
 
 import faire.BackFill
-import faire.NeverNotify
+import faire.NotifyAfter
 
-@NeverNotify
+@NotifyAfter("2022-07-04")
 class InnerApp : BackFill(){
 
 }
