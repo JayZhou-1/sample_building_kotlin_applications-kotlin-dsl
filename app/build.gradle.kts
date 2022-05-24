@@ -1,7 +1,6 @@
 plugins {
     kotlin("jvm") version "1.6.10"
-    `java-library`
-//    application // <2>
+    application // <2>
 }
 
 repositories {
@@ -16,17 +15,6 @@ dependencies {
 
 }
 
-//application {
-//    mainClass.set("demo.AppKt") // <9>
-//}
-
-//gradlePlugin {
-//    plugins {
-//        create("simplePlugin") {
-//            id = "org.example.greeting"
-//            implementationClass = "org.example.GreetingPlugin"
-//        }
-//    }
-//}
-
-
+application {
+    mainClass.set("demo.AppKt") // <9>
+}
