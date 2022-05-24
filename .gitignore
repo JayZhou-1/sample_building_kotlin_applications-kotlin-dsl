@@ -14,6 +14,8 @@ build/*
 app-common/build/*
 buildSrc/build/*
 app/build
+app/inner-app/build/
+app/test/build
 buildSrc/.gradle
 
 .gradle/*

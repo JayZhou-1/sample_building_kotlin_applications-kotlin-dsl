@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.6.10"
+//    kotlin("jvm") version "1.5.31"
     application // <2>
 }
 
@@ -15,14 +16,14 @@ application {
     mainClass.set("com.faire.InnerApp") // <9>
 }
 
-gradlePlugin {
-    plugins {
-        create("simplePlugin") {
-            id = "org.example.greeting"
-            implementationClass = "org.example.GreetingPlugin"
-        }
-    }
-}
+//gradlePlugin {
+//    plugins {
+//        create("simplePlugin") {
+//            id = "org.example.greeting"
+//            implementationClass = "org.example.GreetingPlugin"
+//        }
+//    }
+//}
 
 
 abstract class CustomTask @Inject constructor(
