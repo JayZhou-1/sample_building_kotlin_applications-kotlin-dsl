@@ -16,5 +16,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("demo.AppKt") // <9>
+    mainClass.set("com.faire.AppKt") // <9>
 }

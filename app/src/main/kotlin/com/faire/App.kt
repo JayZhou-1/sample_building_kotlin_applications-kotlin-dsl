@@ -16,8 +16,7 @@ class App @Inject constructor( val jayApp: JayApp): BackFill() {
 }
 
 fun main() {
-//    testSystemEnv()
-
+    testSystemEnv()
 }
 
 private fun testSystemEnv() {

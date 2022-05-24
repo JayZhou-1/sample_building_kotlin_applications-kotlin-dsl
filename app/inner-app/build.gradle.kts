@@ -13,7 +13,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.faire.InnerApp") // <9>
+    mainClass.set("com.faire.InnerAppKt") // <9>
 }
 
 //gradlePlugin {
