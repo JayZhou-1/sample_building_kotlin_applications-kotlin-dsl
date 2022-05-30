@@ -2,12 +2,11 @@ import javax.inject.Inject
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.register
-import org.gradle.process.ExecOperations
-import org.reflections.Reflections
 
 
 class NotifyAfterPlugin : Plugin<Project> {
@@ -21,6 +20,8 @@ class NotifyAfterPlugin : Plugin<Project> {
         val runTimeClassPath = mainSourceSet.runtimeClasspath
         val outputClassDir = mainSourceSet.output.classesDirs
         val compileClassPath = mainSourceSet.compileClasspath
+
+        println("project = ${project.rootProject.name}")
 
         notifyAfterTask = project.tasks.register<NotifyAfterTask>("notifyAfter")
         notifyAfterTask.get().execClasspath.setFrom(runTimeClassPath)
@@ -37,11 +38,10 @@ class NotifyAfterPlugin : Plugin<Project> {
                         val javaExtension = it.extensions.getByType(JavaPluginExtension::class.java)
                         val mainSourceSet = javaExtension.sourceSets["main"]
                         val runTimeClassPath = mainSourceSet.runtimeClasspath.asPath
-                        val outputClassDir = mainSourceSet.output.classesDirs.asPath
                         val compileClassPath = mainSourceSet.compileClasspath.asPath
                         println("runTimeClassPath = ${runTimeClassPath}")
-//                        println("outputClassDir = ${outputClassDir}")
-//                        println("compileClassPath = ${compileClassPath}")
+                        println()
+                        println("compileClassPath = ${compileClassPath}")
                     } catch (e: Exception) {
                         println("could not get JavaExtension")
                     }
