@@ -4,11 +4,10 @@ import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.FileCollection
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Classpath
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
-import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.property
@@ -20,17 +19,19 @@ abstract class NotifyAfterTask : DefaultTask() {
     protected abstract val execOperations: ExecOperations
 
     @get:Inject
-    protected abstract val objects: ObjectFactory
+    abstract val objects: ObjectFactory
 
     @get:Classpath
     val execClasspath: ConfigurableFileCollection = objects.fileCollection()
 
+    @get:Input
+    val mainClassFQN: Property<String> = objects.property<String>()
 
 
     @Internal
     val toolProject: Property<Project> = objects.property<Project>()
         .convention(
-                project.findProject(":app") ?: error("Could not locate tools project: :app")
+            project.findProject(":app") ?: error("Could not locate tools project: :app")
         )
 
     @get:Classpath
@@ -46,15 +47,16 @@ abstract class NotifyAfterTask : DefaultTask() {
     init {
         dependsOn(toolProject.map { it.tasks.named("classes") })
     }
+
     @TaskAction
     fun execute() {
         val exec = execOperations.javaexec {
-            mainClass.set("com.faire.CliAppEntry")
+            mainClass.set(mainClassFQN)
 
             // These use resolved dependencies in the gradle chain, thus needs to be done just before
             // we run the task
             classpath = execClasspath + toolClasspath
-            val commonArgs = listOf(
+            args = listOf(
                 "command.get()",
                 "-j",
                 "settingJsonOutputFile.get().toString()",
@@ -62,7 +64,6 @@ abstract class NotifyAfterTask : DefaultTask() {
                 "settingHashOutputFile.get().toString()",
             )
 
-            args = commonArgs
         }
 
         exec.assertNormalExitValue()

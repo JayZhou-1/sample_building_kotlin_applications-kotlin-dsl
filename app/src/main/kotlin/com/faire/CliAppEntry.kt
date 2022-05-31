@@ -15,6 +15,7 @@ class CliAppEntry {
             val backfillClass =BackFill::class.java
             val classSet = reflection.getSubTypesOf(backfillClass)
             println(classSet.size)
+
             classSet.forEach {
                 println(it.canonicalName)
                 println("it.annotations.size: ${it.annotations.size}")

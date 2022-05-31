@@ -1,11 +1,10 @@
-import javax.inject.Inject
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.register
 
 
@@ -23,8 +22,15 @@ class NotifyAfterPlugin : Plugin<Project> {
 
         println("project = ${project.rootProject.name}")
 
-        notifyAfterTask = project.tasks.register<NotifyAfterTask>("notifyAfter")
-        notifyAfterTask.get().execClasspath.setFrom(runTimeClassPath)
+        notifyAfterTask = project.tasks.register<NotifyAfterTask>("notifyAfter") {
+            val stringProvider = objects.property<String>().convention("com.faire.CliAppEntry")
+            mainClassFQN.set(stringProvider)
+            execClasspath.setFrom(runTimeClassPath)
+        }
+
+        val slackTask = project.tasks.register<NotifyAfterTask>("slack") {
+            mainClassFQN.set("com.faire.NotificationCliEntry")
+        }
 
         project.task("jayzhou") {
             doLast {

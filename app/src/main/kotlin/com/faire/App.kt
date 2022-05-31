@@ -5,6 +5,7 @@ package com.faire
 
 import faire.BackFill
 import faire.NotifyAfter
+import io.github.cdimascio.dotenv.Dotenv
 import javax.inject.Inject
 
 @NotifyAfter("2022-01-01")
@@ -20,16 +21,25 @@ fun main() {
 }
 
 private fun testSystemEnv() {
+    System.getenv().entries.forEach{ mutableEntry ->
+        println(" ${mutableEntry.key} = ${mutableEntry.value}")
+    }
     println(System.getenv("JAVA_HOME"))
     println(System.getenv("jayName"))
+    println(System.getenv("SLACK_TOKEN"))
+
+    val dotenv = Dotenv.load();
+    val slackToken = dotenv.get("SLACK_TOKEN")
+    println("slackToken = ${slackToken}")
+
     println("%,d".format(Int.MAX_VALUE))
     System.out.println(" Free Mem: " + Runtime.getRuntime().freeMemory() / (1024 * 1024));
     val memoryList = mutableListOf<Array<Int>>();
-    for (i in 1..20) {
-        println("Iteration $i Free Mem: ${Runtime.getRuntime().freeMemory() / (1024 * 1024)}");
-        val memoryArray = Array(1_000_000) { i -> 0 }
-//        val memoryArray = Array(Int.MAX_VALUE-1_000_000_000) { i -> 0 }
-        memoryList.add(memoryArray)
-        Thread.sleep(1000)
-    }
+//    for (i in 1..20) {
+//        println("Iteration $i Free Mem: ${Runtime.getRuntime().freeMemory() / (1024 * 1024)}");
+//        val memoryArray = Array(1_000_000) { i -> 0 }
+////        val memoryArray = Array(Int.MAX_VALUE-1_000_000_000) { i -> 0 }
+//        memoryList.add(memoryArray)
+//        Thread.sleep(1000)
+//    }
 }
