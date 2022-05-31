@@ -23,6 +23,8 @@ class NotificationCliEntry {
                 slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
             }
 
+            println("slackToken = ${slackToken.indexOf("xoxb-")}")
+            println("slackToken = ${slackToken.indexOf("3586794394021-")}")
             requestWithRawOkhttpClient(slackToken)
             requestWithSlackServiceApi(slackToken)
 
