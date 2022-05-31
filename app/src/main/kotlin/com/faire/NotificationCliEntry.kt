@@ -15,8 +15,14 @@ class NotificationCliEntry {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val dotenv = Dotenv.load();
-            val slackToken = dotenv.get("CODE_CLEANUP_BOT_SLACK_TOKEN")
+            var slackToken = ""
+            if (System.getenv("jayzhou") == "jayzhou") {
+                val dotenv = Dotenv.load();
+                slackToken = dotenv.get("CODE_CLEANUP_BOT_SLACK_TOKEN")
+            } else {
+                slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
+            }
+
             requestWithRawOkhttpClient(slackToken)
             requestWithSlackServiceApi(slackToken)
 
@@ -45,6 +51,7 @@ class NotificationCliEntry {
             val response = call.execute();
             println("response = ${response}")
         }
+
         private fun requestWithSlackServiceApi(slackToken: String?) {
             val slackClient = getSlackServiceApi()
             val messages = arrayOf("first", "second", "third")
@@ -58,6 +65,7 @@ class NotificationCliEntry {
                 println("response = ${response}")
             }
         }
+
         private fun getSlackServiceApi(): SlackServiceApi {
             val gson = Gson()
             val client = OkHttpClient.Builder().callTimeout(Duration.ofMillis(1000)).build()

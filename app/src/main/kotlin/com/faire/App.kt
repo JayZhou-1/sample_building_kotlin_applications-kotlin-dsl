@@ -27,9 +27,10 @@ private fun testSystemEnv() {
     println(System.getenv("JAVA_HOME"))
     println(System.getenv("jayName"))
     println(System.getenv("SLACK_TOKEN"))
+    println(System.getenv("jayzhou"))
 
     val dotenv = Dotenv.load();
-    val slackToken = dotenv.get("SLACK_TOKEN")
+    val slackToken = dotenv.get("CODE_CLEANUP_BOT_SLACK_TOKEN")
     println("slackToken = ${slackToken}")
 
     println("%,d".format(Int.MAX_VALUE))
