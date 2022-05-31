@@ -1,7 +1,9 @@
 name: code cleanup notification
-on:
-  schedule:
-    - cron: "0 17 * * *" # daily at 17
+#on:
+#  schedule:
+#    - cron: "0 17 * * *" # daily at 17
+
+on: [push]
 
 jobs:
   code-cleanup-notification:
