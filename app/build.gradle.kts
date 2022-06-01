@@ -15,6 +15,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.6.2")
     implementation("org.reflections:reflections:0.9.10")
     implementation("io.github.cdimascio:dotenv-kotlin:6.2.2")
+
+    testImplementation("junit:junit:4.12")
+    testImplementation("org.assertj:assertj-core:3.20.2")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
 }
 
 application {
