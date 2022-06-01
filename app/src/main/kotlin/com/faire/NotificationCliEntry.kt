@@ -40,7 +40,7 @@ class NotificationCliEntry {
         private fun requestWithRawOkhttpClient(slackToken: String?) {
             val okHttpClient = OkHttpClient.Builder().callTimeout(Duration.ofMillis(1000)).build()
             val formBody: RequestBody = FormBody.Builder()
-                .add("channel", "testing")
+                .add("channel", "#testing")
                 .add("text", "jayMessage from raw okHttpClient")
                 .build()
             val request = Request.Builder()
@@ -58,7 +58,7 @@ class NotificationCliEntry {
             val slackClient = getSlackServiceApi()
             val messages = arrayOf("first", "second", "third")
             messages.forEach {
-                val message = PostMessageRequest(channel = "testing", text = it)
+                val message = PostMessageRequest(channel = "#testing", text = it)
                 val call = slackClient.postMessageJSON(
                     authorization = "Bearer $slackToken",
                     message
