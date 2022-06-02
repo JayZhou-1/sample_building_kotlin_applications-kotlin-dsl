@@ -17,9 +17,9 @@ jobs:
         with:
           java-version: 16
       - name: Send out notification
-        uses: burrunan/gradle-cache-action@v1
         env:
           CODE_CLEANUP_BOT_SLACK_TOKEN: ${{ secrets.CODE_CLEANUP_BOT_SLACK_TOKEN }}
+        uses: burrunan/gradle-cache-action@v1
         with:
           arguments: slack
 
