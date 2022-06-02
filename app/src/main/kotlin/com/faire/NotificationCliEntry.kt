@@ -28,7 +28,7 @@ class NotificationCliEntry {
             threadSet.forEach {
                 println("thread: ${it.name}, isDaemon? \t ${it.isDaemon}" )
             }
-//            System.exit(0)
+            System.exit(0)
         }
 
 
