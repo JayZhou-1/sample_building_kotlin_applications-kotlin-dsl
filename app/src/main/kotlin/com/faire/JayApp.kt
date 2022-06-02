@@ -47,3 +47,7 @@ class GuiceModule : AbstractModule() {
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class WithTransactionInterceptor
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class WithTransactionInterceptor2

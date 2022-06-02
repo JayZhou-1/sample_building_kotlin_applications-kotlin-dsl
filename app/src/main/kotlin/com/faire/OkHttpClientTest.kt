@@ -13,6 +13,10 @@ class OkHttpClientTest {
     @field:WithTransactionInterceptor
     private lateinit var okHttpClientWithInterceptor: OkHttpClient
 
+//    @Inject
+//    @field:WithTransactionInterceptor2
+//    private lateinit var okHttpClientWithInterceptor2: OkHttpClient
+
     @Inject
     private lateinit var okHttpClient: OkHttpClient
 
@@ -56,4 +60,5 @@ class OkHttpClientTest {
         println("response = ${response}")
 //        okHttpClientWithInterceptor.connectionPool.evictAll()
     }
+
 }
