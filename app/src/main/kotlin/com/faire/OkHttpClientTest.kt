@@ -17,7 +17,7 @@ class OkHttpClientTest {
     private lateinit var okHttpClient: OkHttpClient
 
     fun callSlack() {
-        var slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
+        val slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
 
         val formBody: RequestBody = FormBody.Builder()
             .add("channel", "#testing")

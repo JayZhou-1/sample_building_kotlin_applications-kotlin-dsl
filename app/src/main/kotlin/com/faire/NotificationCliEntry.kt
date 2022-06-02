@@ -16,6 +16,9 @@ class NotificationCliEntry {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
+
+//            val dotenv= Dotenv.load();
+//            val slackToken = dotenv.get("CODE_CLEANUP_BOT_SLACK_TOKEN")
             var slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
             requestWithRawOkhttpClient(slackToken)
             requestWithSlackServiceApi(slackToken)
