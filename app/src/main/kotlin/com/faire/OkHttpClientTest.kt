@@ -6,11 +6,11 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 
-//class OkHttpClientTest @Inject constructor( @GuiceModule.WithTransactionInterceptor val okHttpClientWithInterceptor: OkHttpClient){
+//class OkHttpClientTest @Inject constructor( @WithTransactionInterceptor val okHttpClientWithInterceptor: OkHttpClient){
 class OkHttpClientTest {
 
     @Inject
-    @field:GuiceModule.WithTransactionInterceptor
+    @field:WithTransactionInterceptor
     private lateinit var okHttpClientWithInterceptor: OkHttpClient
 
     @Inject

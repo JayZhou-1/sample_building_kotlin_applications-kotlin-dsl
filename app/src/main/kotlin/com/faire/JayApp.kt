@@ -42,8 +42,8 @@ class GuiceModule : AbstractModule() {
             chain.proceed(chain.request())
         }).build()
     }
-
-    @Qualifier
-    @Retention(AnnotationRetention.RUNTIME)
-    annotation class WithTransactionInterceptor
 }
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class WithTransactionInterceptor
