@@ -22,7 +22,8 @@ class NotificationCliEntryTest {
         val baseUrl = server.url("chat.postMessage")
         val slackToken = "xoxb-xxxx"
 
-        val okHttpClient = OkHttpClient.Builder().callTimeout(Duration.ofMillis(1000)).build()
+        val okHttpClient = OkHttpClient.Builder().callTimeout(Duration.ofMillis(1000))
+            .build()
         val formBody: RequestBody = FormBody.Builder()
             .add("channel", "testing")
             .add("text", "jayMessage from raw okHttpClient")
@@ -33,6 +34,7 @@ class NotificationCliEntryTest {
             .addHeader("Authorization", "Bearer $slackToken")
             .post(formBody)
             .build()
+
 
         val call = okHttpClient.newCall(request);
         val response = call.execute();

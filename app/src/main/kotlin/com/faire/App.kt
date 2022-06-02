@@ -29,6 +29,8 @@ private fun testSystemEnv() {
     println(System.getenv("SLACK_TOKEN"))
     println(System.getenv("jayzhou"))
 
+    println("System.getenv(\"CODE_CLEANUP_BOT_SLACK_TOKEN\") = ${System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")}")
+
     val dotenv = Dotenv.load();
     val slackToken = dotenv.get("CODE_CLEANUP_BOT_SLACK_TOKEN")
     println("slackToken = ${slackToken}")

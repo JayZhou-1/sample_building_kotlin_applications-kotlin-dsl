@@ -9,36 +9,28 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.concurrent.thread
 
 
 class NotificationCliEntry {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            var slackToken = ""
-            if (System.getenv("jayzhou") == "jayzhou") {
-                val dotenv = Dotenv.load();
-                slackToken = dotenv.get("CODE_CLEANUP_BOT_SLACK_TOKEN")
-            } else {
-                slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
-            }
-
-            println("slackToken = ${slackToken.indexOf("xoxb-")}")
-            println("slackToken = ${slackToken.indexOf("3586794394021-")}")
+            var slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
             requestWithRawOkhttpClient(slackToken)
             requestWithSlackServiceApi(slackToken)
 
             val threadSet: Set<Thread> = Thread.getAllStackTraces().keys
             println(threadSet.size)
             threadSet.forEach {
-                println(it)
+                println("thread: ${it.name}, isDaemon? \t ${it.isDaemon}" )
             }
             System.exit(0)
         }
 
 
         private fun requestWithRawOkhttpClient(slackToken: String?) {
-            val okHttpClient = OkHttpClient.Builder().callTimeout(Duration.ofMillis(1000)).build()
+            val okHttpClient = OkHttpClient.Builder().build()
             val formBody: RequestBody = FormBody.Builder()
                 .add("channel", "#testing")
                 .add("text", "jayMessage from raw okHttpClient")
@@ -52,6 +44,7 @@ class NotificationCliEntry {
             val call = okHttpClient.newCall(request);
             val response = call.execute();
             println("response = ${response}")
+            okHttpClient.connectionPool.evictAll()
         }
 
         private fun requestWithSlackServiceApi(slackToken: String?) {
