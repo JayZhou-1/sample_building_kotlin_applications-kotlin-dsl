@@ -9,7 +9,7 @@ import io.github.cdimascio.dotenv.Dotenv
 import javax.inject.Inject
 
 @NotifyAfter("2022-01-01")
-class App @Inject constructor( val jayApp: JayApp): BackFill() {
+class App @Inject constructor(val jayApp: GuiceTest) : BackFill() {
     val greeting: String
         get() {
             return "Hello World!"
@@ -17,11 +17,20 @@ class App @Inject constructor( val jayApp: JayApp): BackFill() {
 }
 
 fun main() {
-    testSystemEnv()
+//    testSystemEnv()
+//    testMaxByOrNull()
+//    testOOM()
+
+}
+
+private fun testMaxByOrNull() {
+    val persons = listOf(Person("a", 1), Person("b", 2), Person("c", 3))
+    persons.maxByOrNull(Person::age)
+    persons.maxByOrNull { it.age }
 }
 
 private fun testSystemEnv() {
-    System.getenv().entries.forEach{ mutableEntry ->
+    System.getenv().entries.forEach { mutableEntry ->
         println(" ${mutableEntry.key} = ${mutableEntry.value}")
     }
     println(System.getenv("JAVA_HOME"))
@@ -35,14 +44,20 @@ private fun testSystemEnv() {
     val slackToken = dotenv.get("CODE_CLEANUP_BOT_SLACK_TOKEN")
     println("slackToken = ${slackToken}")
 
+}
+
+private fun testOOM() {
     println("%,d".format(Int.MAX_VALUE))
     System.out.println(" Free Mem: " + Runtime.getRuntime().freeMemory() / (1024 * 1024));
     val memoryList = mutableListOf<Array<Int>>();
-//    for (i in 1..20) {
-//        println("Iteration $i Free Mem: ${Runtime.getRuntime().freeMemory() / (1024 * 1024)}");
-//        val memoryArray = Array(1_000_000) { i -> 0 }
-////        val memoryArray = Array(Int.MAX_VALUE-1_000_000_000) { i -> 0 }
-//        memoryList.add(memoryArray)
-//        Thread.sleep(1000)
-//    }
+    for (i in 1..20) {
+        println("Iteration $i Free Mem: ${Runtime.getRuntime().freeMemory() / (1024 * 1024)}");
+        val memoryArray = Array(1_000_000) { i -> 0 }
+//        val memoryArray = Array(Int.MAX_VALUE-1_000_000_000) { i -> 0 }
+        memoryList.add(memoryArray)
+        Thread.sleep(1000)
+    }
 }
+
+
+data class Person(val name: String, val age: Int)

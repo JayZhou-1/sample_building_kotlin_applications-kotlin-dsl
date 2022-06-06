@@ -9,13 +9,9 @@ import okhttp3.RequestBody
 //class OkHttpClientTest @Inject constructor( @WithTransactionInterceptor val okHttpClientWithInterceptor: OkHttpClient){
 class OkHttpClientTest {
 
-    @Inject
-    @field:WithTransactionInterceptor
-    private lateinit var okHttpClientWithInterceptor: OkHttpClient
-
 //    @Inject
-//    @field:WithTransactionInterceptor2
-//    private lateinit var okHttpClientWithInterceptor2: OkHttpClient
+//    @field:WithTransactionInterceptor
+//    private lateinit var okHttpClientWithInterceptor: OkHttpClient
 
     @Inject
     private lateinit var okHttpClient: OkHttpClient
@@ -49,16 +45,5 @@ class OkHttpClientTest {
         println("response = ${response}")
 //        okHttpClient.connectionPool.evictAll()
     }
-
-    fun callGoogleWithOkHttpClientInterceptor() {
-        val request = Request.Builder()
-            .url("https://google.com")
-            .build()
-
-        val call = okHttpClientWithInterceptor.newCall(request);
-        val response = call.execute();
-        println("response = ${response}")
-//        okHttpClientWithInterceptor.connectionPool.evictAll()
-    }
-
 }
+
