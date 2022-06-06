@@ -33,9 +33,13 @@ fun main() {
 
 class GuiceModuleWithProvides : AbstractModule() {
 
-    @Provides //TODO not work
-    fun getMainClass(): MainClass {
-        return MainClass()
+    @Provides
+    // need to pass `okHttpClient`, it will not inject it ,
+    // if use `.toInstance(MainClass())`, then don't need to manually inject
+    fun getMainClass(okHttpClient: OkHttpClient): MainClass {
+        val mainClass = MainClass()
+        mainClass.okHttpClient = okHttpClient
+        return mainClass
     }
 
     @Provides
