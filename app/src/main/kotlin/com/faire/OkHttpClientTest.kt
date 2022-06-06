@@ -9,10 +9,6 @@ import okhttp3.RequestBody
 //class OkHttpClientTest @Inject constructor( @WithTransactionInterceptor val okHttpClientWithInterceptor: OkHttpClient){
 class OkHttpClientTest {
 
-//    @Inject
-//    @field:WithTransactionInterceptor
-//    private lateinit var okHttpClientWithInterceptor: OkHttpClient
-
     @Inject
     private lateinit var okHttpClient: OkHttpClient
 
