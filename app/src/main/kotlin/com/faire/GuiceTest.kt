@@ -10,24 +10,21 @@ import javax.inject.Inject
 import javax.inject.Qualifier
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 
 @NotifyAfter("2022-01-01")
 class GuiceTest : BackFill() {
 
-    @field:Inject
+    @Inject
     lateinit var okHttpClientTest: OkHttpClientTest
 
-    @field:Inject
+    @Inject
+    @field:WithTransactionInterceptor
     lateinit var okHttpClient: OkHttpClient
 
     fun main() {
         println("okHttpClient = ${okHttpClient}")
-//        okHttpClientTest.callSlack();
-        println("=========with interceptor==================")
-//        okHttpClientTest.callGoogleWithOkHttpClientInterceptor();
-        println("=============without interceptor==============")
-        okHttpClientTest.callGoogleWithoutOkHttpClientInterceptor()
+        okHttpClientTest.callSlack();
+        okHttpClientTest.callGoogleWithOkHttpClientInterceptor()
     }
 
 }
@@ -38,12 +35,14 @@ fun main() {
         GuiceModule(),
         object : AbstractModule() {
             override fun configure() {
-//                bind(GuiceTest::class.java).toInstance(GuiceTest())
-//                bind(OkHttpClientTest::class.java).toInstance(OkHttpClientTest())
+                //https://github.com/google/guice/wiki/Injections#automatic-injection
+                // toInstance will automatically performs field and method injections
+                // but @Provides will not
+                bind(GuiceTest::class.java).toInstance(GuiceTest())
+                bind(OkHttpClientTest::class.java).toInstance(OkHttpClientTest())
             }
         },
-
-        )
+    )
 
     val jayApp = injector.getInstance(GuiceTest::class.java)
     jayApp.main()
@@ -51,22 +50,6 @@ fun main() {
 
 
 class GuiceModule : AbstractModule() {
-
-    @Provides
-    fun guiceTest(): GuiceTest {
-        return GuiceTest()
-    }
-
-    @Provides
-    fun createOkHttpClientTest(): OkHttpClientTest {
-        return OkHttpClientTest()
-    }
-
-    @Provides
-    fun okHttpClientWithoutInjector(): OkHttpClient {
-        return OkHttpClient()
-    }
-
     @Provides
     @WithTransactionInterceptor
     fun okHttpClientWithInjector(): OkHttpClient {
@@ -75,8 +58,6 @@ class GuiceModule : AbstractModule() {
             chain.proceed(chain.request())
         }).build()
     }
-
-
 }
 
 @Qualifier

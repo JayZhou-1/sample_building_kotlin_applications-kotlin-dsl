@@ -10,7 +10,8 @@ import okhttp3.RequestBody
 class OkHttpClientTest {
 
     @Inject
-    private lateinit var okHttpClient: OkHttpClient
+    @field:WithTransactionInterceptor
+    lateinit var okHttpClient: OkHttpClient
 
     fun callSlack() {
         val slackToken = System.getenv("CODE_CLEANUP_BOT_SLACK_TOKEN")
@@ -31,7 +32,7 @@ class OkHttpClientTest {
         okHttpClient.connectionPool.evictAll()
     }
 
-    fun callGoogleWithoutOkHttpClientInterceptor() {
+    fun callGoogleWithOkHttpClientInterceptor() {
         val request = Request.Builder()
             .url("https://google.com")
             .build()
@@ -39,7 +40,15 @@ class OkHttpClientTest {
         val call = okHttpClient.newCall(request);
         val response = call.execute();
         println("response = ${response}")
-//        okHttpClient.connectionPool.evictAll()
+        okHttpClient.connectionPool.evictAll()
     }
 }
 
+fun main(){
+    val okHttpClientTest = OkHttpClientTest();
+    val okHttpClient = OkHttpClient.Builder().build()
+    okHttpClientTest.okHttpClient = okHttpClient;
+
+    okHttpClientTest.callGoogleWithOkHttpClientInterceptor()
+//    okHttpClientTest.callSlack()
+}
