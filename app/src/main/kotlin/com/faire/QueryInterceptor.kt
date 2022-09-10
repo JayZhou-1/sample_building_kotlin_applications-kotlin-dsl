@@ -39,8 +39,10 @@ class Consumer1 @Inject constructor(
     @field:QueryReplayerQueryInterceptor private val interceptors2: Set<QueryInterceptor>,
 ) {
     fun getInterceptorCount() {
+        // with @QueryReplayerQueryInterceptor interceptors.size: 2
+        // with @QueryReplayerQueryInterceptor interceptors2.size: 3
         println("with @QueryReplayerQueryInterceptor interceptors.size: ${interceptors.size}")
-        println("with @QueryReplayerQueryInterceptor interceptors2.size: ${interceptors2.size}")
+        println("with @QueryReplayerQueryInterceptor interceptors2.size: ${interceptors2.size}")//TODO: why @field:annotatoin does not work
     }
 }
 
@@ -48,6 +50,7 @@ class Consumer2 @Inject constructor(
     private val interceptors: Set<QueryInterceptor>,
 ) {
     fun getInterceptorCount() {
+        // without @QueryReplayerQueryInterceptor interceptors.size: 3
         println("without @QueryReplayerQueryInterceptor interceptors.size: ${interceptors.size}")
     }
 }
