@@ -16,19 +16,16 @@ interface QueryInterceptor {
     fun beforeQueryRun(sql: String)
 }
 
-//@Singleton
 class QueryInterceptor1 @Inject constructor() : QueryInterceptor {
     override fun beforeQueryRun(sql: String) {
     }
 }
 
-//@Singleton
 class QueryInterceptor2 @Inject constructor() : QueryInterceptor {
     override fun beforeQueryRun(sql: String) {
     }
 }
 
-//@Singleton
 class QueryInterceptor3 @Inject constructor() : QueryInterceptor {
     override fun beforeQueryRun(sql: String) {
     }
@@ -79,6 +76,8 @@ fun main() {
         QueryReplayerBinding,
         OriginalBinding,
     )
+    println("this is to learn how to use multibinder to bindi interface and bind interface with annotation")
+    println("https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets")
 
     val consumer1 = injector.getInstance(Consumer1::class.java)
     consumer1.getInterceptorCount()
