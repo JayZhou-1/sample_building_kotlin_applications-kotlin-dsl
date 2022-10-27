@@ -19,11 +19,11 @@ val JVM_TARGET = JavaVersion.VERSION_11
 
 
 abstract class CustomTaskInRoot @Inject constructor(
-    private val message: String,
-    private val number: Int
-) : DefaultTask(){
+        private val message: String,
+        private val number: Int
+) : DefaultTask() {
     @TaskAction
-    fun mytask(){
+    fun mytask() {
         val buildDir = project.layout.buildDirectory
         println("buildDir = ${buildDir.get()}")
         println("this is from task  $message  $number")
