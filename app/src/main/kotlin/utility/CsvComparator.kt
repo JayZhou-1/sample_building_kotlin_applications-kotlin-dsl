@@ -15,7 +15,6 @@ fun main() {
         println("two files are equal")
     } else {
         map1.entries.stream().forEach { entry ->
-
             val val1 = map1.get(entry.key)
             val val2 = map2.get(entry.key)
             if (val1 != val2) {
@@ -32,7 +31,7 @@ private fun convertFileToMap(fileName: String, skipFirstLine: Boolean = true): M
     var firstLine = skipFirstLine;
     file1.forEachLine { line ->
         if (firstLine) {
-            firstLine = true
+            firstLine = false
         } else {
             val id = line.split(",")[0]
             map1.put(id, line)
