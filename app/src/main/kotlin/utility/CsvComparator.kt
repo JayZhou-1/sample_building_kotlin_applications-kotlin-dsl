@@ -10,7 +10,7 @@ fun main() {
     println("hello world")
     val fileName = ""
     val map1 = convertFileToMap("/Users/shuaizhou/Documents/mySQLResult.csv")
-    val map2 = convertFileToMap("/Users/shuaizhou/Documents/bank_202211071618.csv")
+    val map2 = convertFileToMap("/Users/shuaizhou/Documents/bank_202211071642.csv")
     if (map2 == map1) {
         println("two files are equal")
     } else {
@@ -26,12 +26,17 @@ fun main() {
     }
 }
 
-private fun convertFileToMap(fileName: String): Map<String, String> {
+private fun convertFileToMap(fileName: String, skipFirstLine: Boolean = true): Map<String, String> {
     val file1 = File(fileName)
     val map1 = mutableMapOf<String, String>()
+    var firstLine = skipFirstLine;
     file1.forEachLine { line ->
-        val id = line.split(",")[0]
-        map1.put(id, line)
+        if (firstLine) {
+            firstLine = true
+        } else {
+            val id = line.split(",")[0]
+            map1.put(id, line)
+        }
     }
     return map1
 }
