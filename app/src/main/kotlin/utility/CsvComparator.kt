@@ -10,7 +10,8 @@ fun main() {
     println("hello world")
     val fileName = ""
     val mysqlMap = convertFileToMap("/Users/shuaizhou/Documents/processedFile.csv")
-    val crdbMap = convertFileToMap("/Users/shuaizhou/Documents/bank_202211142005.csv")// CRDB
+    val crdbMap = convertFileToMap("/Users/shuaizhou/Documents/users_202212121113.csv")// CRDB
+//    val crdbMap = convertFileToMap("/Users/shuaizhou/Documents/bank_202211142005.csv")// CRDB
     if (crdbMap == mysqlMap) {
         println("two files are equal")
     } else {
@@ -33,8 +34,21 @@ private fun convertFileToMap(fileName: String, skipFirstLine: Boolean = true): M
         if (firstLine) {
             firstLine = false
         } else {
-            val id = line.split(",")[0]
-            map1.put(id, line)
+            val fields = line.split(",")
+            val fieldsWithQuotes = fields.map {
+                if (!it.startsWith("\"")) {
+                    "\"$it\""
+                } else {
+                    it
+                }
+            }
+            val id = fieldsWithQuotes[0]
+            val newLine = fieldsWithQuotes.joinToString()
+            if (id.startsWith("\"")) {
+                map1.put(id, newLine)
+            } else {
+                map1.put("\"$id\"", newLine)
+            }
         }
     }
     return map1
