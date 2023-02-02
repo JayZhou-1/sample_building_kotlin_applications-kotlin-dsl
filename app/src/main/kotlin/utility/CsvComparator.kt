@@ -10,8 +10,8 @@ fun main() {
     println("hello world")
     val fileName = ""
     val mysqlMap = convertFileToMap("/Users/shuaizhou/Documents/processedFile.csv")
-    val crdbMap = convertFileToMap("/Users/shuaizhou/Documents/users_202212121113.csv")// CRDB
-//    val crdbMap = convertFileToMap("/Users/shuaizhou/Documents/bank_202211142005.csv")// CRDB
+    val crdbMap = convertFileToMap("/Users/shuaizhou/Documents/rides_202212121156.csv")// CRDB
+    // note: need to config export config 1. change number to have two decimial 2. change datetime to exclude fraction
     if (crdbMap == mysqlMap) {
         println("two files are equal")
     } else {
